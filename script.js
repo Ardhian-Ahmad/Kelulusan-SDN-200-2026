@@ -1,6 +1,6 @@
 // === LOGIKA COUNTDOWN WAKTU PENGUMUMAN ===
 // Set tanggal dan waktu pengumuman: 2 Juni 2026, 08:00:00
-const targetDate = new Date("June 2, 2026 08:00:00").getTime();
+const targetDate = new Date("May 2, 2026 08:00:00").getTime();
 
 const countdownTimer = setInterval(function() {
     const now = new Date().getTime();
