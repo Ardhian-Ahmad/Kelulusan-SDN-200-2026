@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Kelulusan UPT SDN 200 Gresik</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Halaman Login -->
+        <div id="login-section">
+            <h2>Cek Kelulusan</h2>
+            <p>Masukkan NISN untuk melihat hasil pengumuman.</p>
+            <input type="text" id="nisn-input" placeholder="Masukkan NISN...">
+            <button onclick="cekKelulusan()">Buka Amplop</button>
+            <p id="error-msg" style="color: red; display: none;">NISN tidak ditemukan.</p>
+        </div>
+
+        <!-- Halaman Kartu Gosok -->
+        <div id="scratch-section" style="display: none;">
+            <h3>Gosok area di bawah ini!</h3>
+            <div class="scratch-card-container">
+                <!-- Hasil di balik kartu -->
+                <div class="result-content">
+                    <h1>LULUS!</h1>
+                    <p>Selamat, <span id="nama-siswa"></span>!</p>
+                </div>
+                <!-- Lapisan yang digosok -->
+                <canvas id="scratch-pad"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
