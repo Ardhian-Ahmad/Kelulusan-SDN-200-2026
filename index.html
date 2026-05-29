@@ -7,12 +7,15 @@
     
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-6 text-slate-800">
     
     <header class="text-center mb-8">
+        <img src="logo-sekolah.webp" alt="Logo UPT SDN 200 Gresik" class="w-24 h-24 mx-auto mb-4 object-contain fallback-logo">
         <h1 class="heading-font text-3xl md:text-4xl font-bold mb-2">UPT SDN 200 Gresik</h1>
         <p class="text-md md:text-lg text-slate-600">Pengumuman Kelulusan Angkatan 2025/2026</p>
     </header>
@@ -23,27 +26,29 @@
         
         <input type="text" id="nisn-input" placeholder="Masukkan NISN..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4 text-center text-lg font-medium tracking-widest">
         
-        <button onclick="cekKelulusan()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors shadow-md">
-            Buka Amplop
+        <button id="btn-login" onclick="cekKelulusan()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors shadow-md disabled:bg-slate-400">
+            Sedang Memuat Data...
         </button>
         
         <p id="error-msg" class="text-red-500 text-sm mt-4 hidden text-center font-medium">NISN tidak ditemukan. Cek kembali.</p>
     </div>
 
-    <main id="scratch-section" class="flex-col items-center hidden">
-        <div class="scratch-card" id="scratch-card">
-            <div class="result-layer">
-                <p class="text-5xl mb-2">🎉</p>
-                <h2 id="status-lulus" class="heading-font text-4xl font-bold text-center text-white drop-shadow-md">LULUS!</h2>
-                <p id="nama-siswa-lulus" class="mt-2 text-lg font-medium text-white"></p>
+    <main id="scratch-section" class="flex-col items-center hidden w-full">
+        <div class="scratch-card-wrapper">
+            <div class="result-layer shadow-lg border border-orange-200">
+                <h2 id="status-lulus" class="heading-font text-4xl font-bold text-center text-white drop-shadow-md mt-2">LULUS!</h2>
+                <p id="nama-siswa-lulus" class="mt-2 text-lg font-medium text-white text-center px-4 leading-tight"></p>
+                
+                <a id="btn-download" href="#" target="_blank" class="mt-5 px-6 py-2 bg-white text-orange-600 font-bold rounded-full shadow-md hover:bg-orange-50 transition-colors hidden cursor-pointer z-50">
+                    📥 Download SKL
+                </a>
             </div>
-            <canvas id="scratch-canvas" width="320" height="200"></canvas>
+            
+            <canvas id="scratch-canvas" width="320" height="220"></canvas>
         </div>
-        <p class="instruction mt-6 text-sm font-bold text-slate-500 uppercase tracking-widest">✨ Gosok Area di Atas ✨</p>
+        <p class="instruction mt-8 text-sm font-bold text-slate-500 uppercase tracking-widest">✨ Gosok Area Kartu Di Atas ✨</p>
     </main>
 
-    <div class="confetti-container" id="confetti"></div>
-    
     <script src="script.js"></script>
 </body>
 </html>
