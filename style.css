@@ -4,34 +4,37 @@ body {
 }
 .heading-font { font-family: 'Playfair Display', serif; }
 
-.confetti-container {
-    position: fixed; inset: 0; pointer-events: none; z-index: 100; overflow: hidden;
-    opacity: 0; transition: opacity 0.3s;
-}
-.confetti-container.active { opacity: 1; }
-.confetti-piece {
-    position: absolute; width: 10px; height: 20px; top: -20px;
-    animation: confetti-fall 3s ease-out forwards;
+/* Jika logo gagal dimuat (link kosong), tampilkan blok warna abu */
+.fallback-logo[src="URL_LOGO_ANDA_DISINI"] {
+    background-color: #e2e8f0;
+    border-radius: 50%;
+    border: 2px dashed #cbd5e1;
 }
 
-@keyframes confetti-fall {
-    0% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
+.scratch-card-wrapper {
+    position: relative; 
+    width: 320px; 
+    height: 220px; 
+    margin: 0 auto;
 }
-
-.scratch-card {
-    position: relative; width: 320px; height: 200px; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.scratch-card canvas {
-    position: absolute; inset: 0; z-index: 2; cursor: grab; border-radius: 16px;
-}
-.scratch-card canvas:active { cursor: grabbing; }
 
 .result-layer {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; z-index: 1;
+    position: absolute; 
+    inset: 0; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    z-index: 1; /* Di bawah canvas */
     background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+    border-radius: 16px;
+}
+
+#scratch-canvas {
+    position: absolute; 
+    inset: 0; 
+    z-index: 10; /* Berada tepat di atas result-layer */
+    cursor: crosshair; 
     border-radius: 16px;
 }
 
