@@ -35,8 +35,9 @@ const countdownTimer = setInterval(function() {
 }, 1000); // Diperbarui setiap 1 detik
 
 
-// === LOGIKA DATA & GOOGLE SHEET ===
-const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR72t5w1Sctplm_oFYboEtKHJqO-iZqgHjGDvt6F1eBTMHdfqmfYHNTqhelbKlxX6fDIP1ZLo5YRRW_/pub?output=csv";
+// Link disandikan dengan Base64 agar tidak mudah dicari lewat CTRL+F
+const kodeRahasia = "aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vc3ByZWFkc2hlZXRzL2QvZS8yUEFDWC0xdlI3MnQ1dzFTY3RwbG1fb0ZZYm9FdEtISnFPLWlacWdIakdEdnQ2RjFlQlRNSGRmcW1mWUhOVHFoZWxiS2x4WDZmRElQMVpMbzVZUlJXXy9wdWI/b3V0cHV0PWNzdg==";
+const SHEET_CSV_URL = atob(kodeRahasia); // atob() otomatis menerjemahkan sandi kembali menjadi link
 
 let dataSiswa = {};
 
@@ -200,5 +201,31 @@ canvas.addEventListener('touchmove', (e) => {
     if (isScratching) {
         e.preventDefault(); 
         scratch(getPos(e).x, getPos(e).y); 
+    }
+});
+
+// === SISTEM KEAMANAN FRONT-END ===
+// 1. Blokir Klik Kanan
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+
+// 2. Blokir Kombinasi Tombol Tertentu (CTRL+U, F12, CTRL+SHIFT+I/J/C)
+document.addEventListener('keydown', function(e) {
+    // Blokir F12
+    if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+    }
+    // Blokir CTRL + U (View Source)
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
+        e.preventDefault();
+    }
+    // Blokir CTRL + SHIFT + I / J / C (Developer Tools)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+        e.preventDefault();
+    }
+    // Blokir CTRL + S (Save Page)
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
+        e.preventDefault();
     }
 });
