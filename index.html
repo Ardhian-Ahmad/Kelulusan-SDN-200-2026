@@ -4,29 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengumuman Kelulusan UPT SDN 200 Gresik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Halaman Login -->
-        <div id="login-section">
-            <h2>Cek Kelulusan</h2>
-            <p>Masukkan NISN untuk melihat hasil pengumuman.</p>
-            <input type="text" id="nisn-input" placeholder="Masukkan NISN...">
-            <button onclick="cekKelulusan()">Buka Amplop</button>
-            <p id="error-msg" style="color: red; display: none;">NISN tidak ditemukan.</p>
+    <div class="container fade-in">
+        <div class="header">
+            <h2>UPT SDN 200 Gresik</h2>
+            <p>Pengumuman Kelulusan Angkatan 2025/2026</p>
         </div>
 
-        <!-- Halaman Kartu Gosok -->
+        <div id="login-section">
+            <div class="input-group">
+                <input type="text" id="nisn-input" placeholder="Masukkan NISN Anda..." autocomplete="off">
+                <button onclick="cekKelulusan()">Lihat Hasil</button>
+            </div>
+            <p id="error-msg" class="error-text">NISN tidak ditemukan. Silakan cek kembali.</p>
+        </div>
+
         <div id="scratch-section" style="display: none;">
-            <h3>Gosok area di bawah ini!</h3>
+            <p class="instruction-text">✨ Usap area di bawah ini ✨</p>
             <div class="scratch-card-container">
-                <!-- Hasil di balik kartu -->
                 <div class="result-content">
-                    <h1>LULUS!</h1>
-                    <p>Selamat, <span id="nama-siswa"></span>!</p>
+                    <h1 class="status-lulus">LULUS!</h1>
+                    <p class="nama-siswa" id="nama-siswa"></p>
                 </div>
-                <!-- Lapisan yang digosok -->
                 <canvas id="scratch-pad"></canvas>
             </div>
         </div>
