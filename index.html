@@ -1,40 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengumuman Kelulusan UPT SDN 200 Gresik</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
-<body>
-    <div class="container fade-in">
-        <div class="header">
-            <h2>UPT SDN 200 Gresik</h2>
-            <p>Pengumuman Kelulusan Angkatan 2025/2026</p>
-        </div>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 text-slate-800">
+    
+    <header class="text-center mb-8">
+        <h1 class="heading-font text-3xl md:text-4xl font-bold mb-2">UPT SDN 200 Gresik</h1>
+        <p class="text-md md:text-lg text-slate-600">Pengumuman Kelulusan Angkatan 2025/2026</p>
+    </header>
 
-        <div id="login-section">
-            <div class="input-group">
-                <input type="text" id="nisn-input" placeholder="Masukkan NISN Anda..." autocomplete="off">
-                <button onclick="cekKelulusan()">Lihat Hasil</button>
-            </div>
-            <p id="error-msg" class="error-text">NISN tidak ditemukan. Silakan cek kembali.</p>
-        </div>
-
-        <div id="scratch-section" style="display: none;">
-            <p class="instruction-text">✨ Usap area di bawah ini ✨</p>
-            <div class="scratch-card-container">
-                <div class="result-content">
-                    <h1 class="status-lulus">LULUS!</h1>
-                    <p class="nama-siswa" id="nama-siswa"></p>
-                </div>
-                <canvas id="scratch-pad"></canvas>
-            </div>
-        </div>
+    <div id="login-section" class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 max-w-sm w-full flex flex-col items-center">
+        <h2 class="text-xl font-bold mb-4">Cek Kelulusan</h2>
+        <p class="text-sm text-center text-slate-500 mb-6">Masukkan NISN Anda untuk membuka hasil pengumuman kelulusan.</p>
+        
+        <input type="text" id="nisn-input" placeholder="Masukkan NISN..." class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4 text-center text-lg font-medium tracking-widest">
+        
+        <button onclick="cekKelulusan()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-colors shadow-md">
+            Buka Amplop
+        </button>
+        
+        <p id="error-msg" class="text-red-500 text-sm mt-4 hidden text-center font-medium">NISN tidak ditemukan. Cek kembali.</p>
     </div>
 
+    <main id="scratch-section" class="flex-col items-center hidden">
+        <div class="scratch-card" id="scratch-card">
+            <div class="result-layer">
+                <p class="text-5xl mb-2">🎉</p>
+                <h2 id="status-lulus" class="heading-font text-4xl font-bold text-center text-white drop-shadow-md">LULUS!</h2>
+                <p id="nama-siswa-lulus" class="mt-2 text-lg font-medium text-white"></p>
+            </div>
+            <canvas id="scratch-canvas" width="320" height="200"></canvas>
+        </div>
+        <p class="instruction mt-6 text-sm font-bold text-slate-500 uppercase tracking-widest">✨ Gosok Area di Atas ✨</p>
+    </main>
+
+    <div class="confetti-container" id="confetti"></div>
+    
     <script src="script.js"></script>
 </body>
 </html>
