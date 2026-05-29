@@ -14,8 +14,11 @@ body {
 .scratch-card-wrapper {
     position: relative; 
     width: 320px; 
-    height: 220px; 
+    height: 260px; /* Ditinggikan agar teks dan tombol muat sempurna */
     margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden; /* Mengunci lapisan agar tidak ada yang bocor keluar */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15); /* Memperhalus bayangan */
 }
 
 .result-layer {
@@ -25,17 +28,16 @@ body {
     flex-direction: column;
     align-items: center; 
     justify-content: center; 
-    z-index: 1; /* Di bawah canvas */
+    z-index: 1; 
     background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
-    border-radius: 16px;
+    /* Border radius di sini bisa dihapus karena sudah diatasi oleh wrapper */
 }
 
 #scratch-canvas {
     position: absolute; 
     inset: 0; 
-    z-index: 10; /* Berada tepat di atas result-layer */
+    z-index: 10; 
     cursor: crosshair; 
-    border-radius: 16px;
 }
 
 .instruction { animation: pulse-glow 2s ease-in-out infinite; }
