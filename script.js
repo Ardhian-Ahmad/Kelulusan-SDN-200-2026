@@ -1,4 +1,41 @@
-// Link CSV Anda sudah terpasang
+// === LOGIKA COUNTDOWN WAKTU PENGUMUMAN ===
+// Set tanggal dan waktu pengumuman: 2 Juni 2026, 08:00:00
+const targetDate = new Date("June 2, 2026 08:00:00").getTime();
+
+const countdownTimer = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const countdownSection = document.getElementById("countdown-section");
+    const loginSection = document.getElementById("login-section");
+
+    if (distance <= 0) {
+        // Waktu pengumuman tiba! Hentikan hitung mundur.
+        clearInterval(countdownTimer);
+        
+        // Sembunyikan countdown, tampilkan form login
+        if (countdownSection) countdownSection.style.display = "none";
+        if (loginSection) {
+            loginSection.classList.remove("hidden");
+            loginSection.classList.add("flex");
+        }
+    } else {
+        // Kalkulasi sisa hari, jam, menit, detik
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Render ke HTML dengan tambahan '0' di depan jika angka < 10 (contoh: 09 Detik)
+        document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
+        document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
+        document.getElementById("cd-minutes").innerText = minutes.toString().padStart(2, '0');
+        document.getElementById("cd-seconds").innerText = seconds.toString().padStart(2, '0');
+    }
+}, 1000); // Diperbarui setiap 1 detik
+
+
+// === LOGIKA DATA & GOOGLE SHEET ===
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR72t5w1Sctplm_oFYboEtKHJqO-iZqgHjGDvt6F1eBTMHdfqmfYHNTqhelbKlxX6fDIP1ZLo5YRRW_/pub?output=csv";
 
 let dataSiswa = {};
@@ -8,7 +45,6 @@ window.addEventListener('DOMContentLoaded', () => {
         download: true,
         header: true,
         skipEmptyLines: true,
-        // Fungsi ini memaksa semua nama kolom di baris pertama Sheet Anda menjadi huruf besar dan tanpa spasi di awal/akhir, agar tidak gagal sinkron
         transformHeader: function(h) {
             return h.trim().toUpperCase(); 
         },
@@ -52,10 +88,11 @@ function cekKelulusan() {
         if (data.LINK_SKL !== "#" && data.LINK_SKL !== "") {
             btnDownload.href = data.LINK_SKL;
         } else {
-            btnDownload.style.display = 'none'; // Sembunyikan tombol jika link tidak ada
+            btnDownload.style.display = 'none'; 
         }
         btnDownload.classList.add("hidden"); 
 
+        // Transisi dari form login ke kartu gosok
         document.getElementById("login-section").style.display = "none";
         const scratchSection = document.getElementById("scratch-section");
         scratchSection.classList.remove("hidden");
@@ -67,13 +104,13 @@ function cekKelulusan() {
     }
 }
 
+// === LOGIKA SCRATCH CARD (KARTU GOSOK) ===
 const canvas = document.getElementById('scratch-canvas');
 const ctx = canvas.getContext('2d');
 let isScratching = false;
 let revealed = false;
 
 function initCanvas() {
-    // Sesuaikan tinggi dengan CSS yang baru diperbaiki (260px)
     canvas.width = 320;
     canvas.height = 260;
 
@@ -133,6 +170,7 @@ function checkReveal() {
         canvas.style.transition = 'opacity 0.6s ease-out';
         canvas.style.opacity = '0';
         
+        // Memunculkan tombol download bersamaan dengan matinya canvas
         document.getElementById("btn-download").classList.remove("hidden");
         
         setTimeout(() => {
