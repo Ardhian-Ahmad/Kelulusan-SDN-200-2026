@@ -20,7 +20,31 @@
         <p class="text-md md:text-lg text-slate-600">Pengumuman Kelulusan Angkatan 2025/2026</p>
     </header>
 
-    <div id="login-section" class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 max-w-sm w-full flex flex-col items-center">
+    <div id="countdown-section" class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 max-w-sm w-full flex flex-col items-center">
+        <h2 class="text-xl font-bold mb-2 text-center text-slate-800">Menunggu Waktu Pengumuman</h2>
+        <p class="text-sm text-center text-slate-500 mb-6">Portal akan otomatis terbuka pada<br><span class="font-bold text-green-600">2 Juni 2026 Pukul 08:00 WIB</span></p>
+        
+        <div class="flex gap-3 text-center justify-center w-full">
+            <div class="flex flex-col bg-slate-50 border border-slate-200 p-2 rounded-lg w-[4.5rem]">
+                <span id="cd-days" class="text-2xl font-bold text-green-600">00</span>
+                <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Hari</span>
+            </div>
+            <div class="flex flex-col bg-slate-50 border border-slate-200 p-2 rounded-lg w-[4.5rem]">
+                <span id="cd-hours" class="text-2xl font-bold text-green-600">00</span>
+                <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Jam</span>
+            </div>
+            <div class="flex flex-col bg-slate-50 border border-slate-200 p-2 rounded-lg w-[4.5rem]">
+                <span id="cd-minutes" class="text-2xl font-bold text-green-600">00</span>
+                <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Menit</span>
+            </div>
+            <div class="flex flex-col bg-slate-50 border border-slate-200 p-2 rounded-lg w-[4.5rem]">
+                <span id="cd-seconds" class="text-2xl font-bold text-green-600">00</span>
+                <span class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mt-1">Detik</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-section" class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 max-w-sm w-full flex-col items-center hidden">
         <h2 class="text-xl font-bold mb-4">Cek Kelulusan</h2>
         <p class="text-sm text-center text-slate-500 mb-6">Masukkan NISN Anda untuk membuka hasil pengumuman kelulusan.</p>
         
@@ -38,12 +62,10 @@
             <div class="result-layer shadow-lg">
                 <h2 id="status-lulus" class="heading-font text-4xl font-bold text-center text-white drop-shadow-md mt-2">LULUS!</h2>
                 <p id="nama-siswa-lulus" class="mt-2 text-lg font-medium text-white text-center px-4 leading-tight"></p>
-                
                 <a id="btn-download" href="#" target="_blank" class="mt-5 px-6 py-2 bg-white text-orange-600 font-bold rounded-full shadow-md hover:bg-orange-50 transition-colors hidden cursor-pointer z-50">
                     📥 Download SKL
                 </a>
             </div>
-            
             <canvas id="scratch-canvas" width="320" height="260"></canvas>
         </div>
         <p class="instruction mt-8 text-sm font-bold text-slate-500 uppercase tracking-widest">✨ Gosok Area Kartu Di Atas ✨</p>
